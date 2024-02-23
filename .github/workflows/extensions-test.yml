@@ -76,5 +76,9 @@ jobs:
           ls -la src
       - name: test
         run: |
-          cd libsql-sqlite3/test/rust_suite
-          cargo test -- --test extensions
+          ls -la
+          cd libsql-sqlite3
+          ls -la
+          echo "==="
+          # cd libsql-sqlite3/test/rust_suite
+          cargo test --extensions

@@ -73,6 +73,7 @@ jobs:
           export VSS_VERSION="v0.1.2"
           wget https://github.com/asg017/sqlite-vss/releases/download/$VSS_VERSION/sqlite-vss-$VSS_VERSION-loadable-linux-x86_64.tar.gz
           tar -xvf sqlite-vss-$VSS_VERSION-loadable-linux-x86_64.tar.gz -C src
+          ls -la src
       - name: test
         run: |
           cd libsql-sqlite3/test/rust_suite

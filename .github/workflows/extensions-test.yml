@@ -81,4 +81,4 @@ jobs:
           ls -la
           echo "==="
           # cd libsql-sqlite3/test/rust_suite
-          cargo test --extensions
+          cargo test extensions

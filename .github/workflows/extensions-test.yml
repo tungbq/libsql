@@ -36,26 +36,6 @@ jobs:
           cd ext/crr
           make test
 
-  rs-tests:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: libsql-sqlite3
-    name: CR SQLite Rust Tests
-
-    steps:
-      - uses: hecrj/setup-rust-action@v1
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: build libsql
-        run: |
-          ./configure
-          make libsql
-      - name: test
-        run: |
-          cd ext/crr/rs/core
-          cargo test --features=loadable_extension
-
   extensions-tests:
     runs-on: ubuntu-latest
     name: Extensions Tests

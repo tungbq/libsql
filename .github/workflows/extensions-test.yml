@@ -91,6 +91,8 @@ jobs:
           # cargo test -- --extensions
           # cargo test --tests "src::extensions::*"
           # cargo test "src::extensions::*"
-          cargo test --features=extensions "extensions::.*"
+          # cargo test --features=extensions "extensions::.*"
+          cargo test --features=extensions extensions
+
 
 

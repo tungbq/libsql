@@ -83,5 +83,6 @@ jobs:
           cd libsql-sqlite3/test/rust_suite
           # cargo test --test extensions
           # cargo test --features=extensions
-          cargo test --features=extensions --test extensions::test_sqlite_vss
+          # cargo test --features=extensions --test extensions::test_sqlite_vss
+          cargo test --features=extensions test_sqlite_vss
 

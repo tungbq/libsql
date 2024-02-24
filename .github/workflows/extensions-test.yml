@@ -87,5 +87,6 @@ jobs:
           # cargo test --features=extensions test_sqlite_vss
           # cargo test --features=extensions src::extensions
           # cargo test --features=extensions -- src::extensions
-          cargo test --features extensions --tests src/extensions
+          # cargo test --features extensions --tests src/extensions
+          cargo test -- --extensions
 

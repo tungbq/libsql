@@ -6,7 +6,7 @@ use tonic::metadata::MetadataMap;
 
 pub fn parse_http_basic_auth_arg(arg: &str) -> Result<Option<String>> {
     if arg == "always" {
-        return Ok(None);
+        return Ok(Some("always".to_string()));
     }
 
     let Some((scheme, param)) = arg.split_once(':') else {
@@ -30,7 +30,7 @@ pub fn parse_jwt_key(data: &str) -> Result<jsonwebtoken::DecodingKey> {
         bail!("Key is in unsupported PEM format")
     } else {
         jsonwebtoken::DecodingKey::from_ed_components(data)
-            .context("Could not decode Ed25519 public key from base64")
+            .map_err(|e| anyhow::anyhow!("Could not decode Ed25519 public key from base64: {e}"))
     }
 }
 
@@ -71,6 +71,8 @@ mod tests {
 
     use crate::auth::{parse_http_auth_header, AuthError};
 
+    use super::parse_http_basic_auth_arg;
+
     #[test]
     fn parse_http_auth_header_returns_auth_header_param_when_valid() {
         assert_eq!(
@@ -110,5 +112,11 @@ mod tests {
             parse_http_auth_header("basic", &HeaderValue::from_str("Bearer abc").ok()).unwrap_err(),
             AuthError::HttpAuthHeaderUnsupportedScheme
         )
+    }
+
+    #[test]
+    fn parse_http_auth_arg_always() {
+        let out = parse_http_basic_auth_arg("always").unwrap();
+        assert_eq!(out, Some("always".to_string()));
     }
 }
